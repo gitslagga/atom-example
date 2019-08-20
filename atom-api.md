@@ -3,6 +3,24 @@
 #### Math Wallet
 * slagga nonce
 * rival kiss spawn host crucial deer uniform sea cluster short chest recall board strike enrich index category audit love virus prevent umbrella allow child
+```
+                ^  +-------------------------------+  ^
+                |  |                               |  |
+                |  |     AtomApi 127.0.0.1:3000    |  |
+                |  |                               |  |   Atom SDK
+                |  |            ^      +           |  |
+                |  +-------- | Intereact | --------+  v
+                |  |            +      v           |  ^
+                |  |                               |  |
+Blockchain api  |  |        Rest 127.0.0.1317      |  |
+                |  |                               |  |
+                |  +-------------------------------+  |   Wallet Core
+                |  |                               |  |
+                |  |        Rpc 127.0.0.26657      |  |
+                |  |                               |  |
+                v  +-------------------------------+  v
+```
+
 
 #### /abci_info
 * curl tcp@localhost:26657/abci_info | jq

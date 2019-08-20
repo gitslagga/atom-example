@@ -1,0 +1,31 @@
+{
+  "name": "atom-example",
+  "version": "1.0.0",
+  "description": "javascript api example of atom",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitslagga/atom-example.git"
+  },
+  "keywords": [
+    "cosmos-sdk",
+    "atom",
+    "tendermint",
+    "nodejs"
+  ],
+  "author": "slagga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gitslagga/atom-example/issues"
+  },
+  "homepage": "https://github.com/gitslagga/atom-example#readme",
+  "dependencies": {
+    "@cosmostation/cosmosjs": "^0.3.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "random-words": "^1.1.0"
+  }
+}

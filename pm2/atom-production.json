@@ -1,0 +1,12 @@
+{
+    "apps": [{
+        "name": "atom-production",
+        "script": "./index.js",
+        "log_date_format": "YYYY-MM-DD HH:mm:ss SSS",
+        "env": {
+            "NODE_ENV": "production"
+        },
+        "output": "/tmp/wwwlogs/atom-production/out.log",
+        "error": "/tmp/wwwlogs/atom-production/error.log"
+    }]
+}
