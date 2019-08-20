@@ -6,3 +6,6 @@ const encode = sha256(Buffer.from(str, 'base64'))
 
 console.log(encode)
 console.log(encode.length)
+
+// A944DFD8A0DC40E5F1D329533D6D46B0A5024FACD98312BBC73555FD1CF69D83
+// 64
