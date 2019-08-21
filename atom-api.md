@@ -21,23 +21,36 @@ Blockchain api  |  |        Rest 127.0.0.1317      |  |
                 v  +-------------------------------+  v
 ```
 
+## REST API EXAMPE
+#### /bank/balances/{address}
+* https://lcd-do-not-abuse.cosmostation.io/bank/balances/cosmos1gk5y73rn00qmz054gur657aaxhcdur528mk2vj
+```
+[{"denom":"uatom","amount":"2970000"}]
+```
 
-#### /abci_info
-* curl tcp@localhost:26657/abci_info | jq
+#### /auth/accounts/{address}
+* https://lcd-do-not-abuse.cosmostation.io/auth/accounts/cosmos127rss0s8nl76d0lgf2hz83k8jwfafgvs3g0fnd
+```
+{"type":"auth/Account","value":{"address":"","coins":null,"public_key":null,"account_number":"0","sequence":"0"}}
+```
+
+#### /txs/{hash}
+* https://lcd-do-not-abuse.cosmostation.io/txs/A0AFDA28139054BDFE065418DB2795F69B494FF996565FF7382493FAEFFC0905
 ```
 {
-  "jsonrpc": "2.0",
-  "id": "",
-  "result": {
-    "response": {
-      "data": "GaiaApp",
-      "last_block_height": "1164567",
-      "last_block_app_hash": "koNMtqyg/w68p5sdsQTJaOGoR97DvpZ4Q0fF/o2Rq6M="
-    }
-  }
+    "height":"1495889",
+    "txhash":"A0AFDA28139054BDFE065418DB2795F69B494FF996565FF7382493FAEFFC0905",
+    "raw_log":"[{"msg_index":"0","success":true,"log":""}]",
+    "logs":Array[1],
+    "gas_wanted":"200000",
+    "gas_used":"27778",
+    "tags":Array[3],
+    "tx":Object{...},
+    "timestamp":"2019-08-20T06:30:55Z"
 }
 ```
 
+## RPC API EXAMPLE
 #### /status
 * curl tcp@localhost:26657/status | jq
 ```
@@ -77,198 +90,6 @@ Blockchain api  |  |        Rest 127.0.0.1317      |  |
       },
       "voting_power": "0"
     }
-  }
-}
-```
-
-#### /num_unconfirmed_txs
-* curl tcp@localhost:26657/num_unconfirmed_txs | jq
-```
-{
-  "jsonrpc": "2.0",
-  "id": "",
-  "result": {
-    "n_txs": "0",
-    "total": "0",
-    "total_bytes": "0",
-    "txs": null
-  }
-}
-```
-
-#### /unconfirmed_txs
-* curl tcp@localhost:26657/unconfirmed_txs?limit= | jq
-```
-{
-  "jsonrpc": "2.0",
-  "id": "",
-  "result": {
-    "n_txs": "0",
-    "total": "0",
-    "total_bytes": "0",
-    "txs": []
-  }
-}
-```
-
-#### /net_info
-* curl tcp@localhost:26657/net_info | jq
-```
-{
-  "jsonrpc": "2.0",
-  "id": "",
-  "result": {
-    "listening": true,
-    "listeners": [
-      "Listener(@)"
-    ],
-    "n_peers": "10",
-    "peers": [
-      {
-        "node_info": {
-          "protocol_version": {
-            "p2p": "7",
-            "block": "10",
-            "app": "0"
-          },
-          "id": "3165412e2d8d5563fe17fe0f794e384071dd5372",
-          "listen_addr": "tcp://139.99.124.225:26656",
-          "network": "cosmoshub-2",
-          "version": "0.31.5",
-          "channels": "4020212223303800",
-          "moniker": "Castlenode",
-          "other": {
-            "tx_index": "on",
-            "rpc_address": "tcp://127.0.0.1:26657"
-          }
-        },
-        "is_outbound": true,
-        "connection_status": {
-          "Duration": "154796471903573",
-          "SendMonitor": {
-            "Active": true,
-            "Start": "2019-08-13T11:00:01.28Z",
-            "Duration": "154796480000000",
-            "Idle": "160000000",
-            "Bytes": "6785220",
-            "Samples": "356890",
-            "InstRate": "119",
-            "CurRate": "51",
-            "AvgRate": "44",
-            "PeakRate": "63088",
-            "BytesRem": "0",
-            "TimeRem": "0",
-            "Progress": 0
-          },
-          "RecvMonitor": {
-            "Active": true,
-            "Start": "2019-08-13T11:00:01.28Z",
-            "Duration": "154796480000000",
-            "Idle": "320000000",
-            "Bytes": "6537460293",
-            "Samples": "352222",
-            "InstRate": "57091",
-            "CurRate": "41635",
-            "AvgRate": "42233",
-            "PeakRate": "4058130",
-            "BytesRem": "0",
-            "TimeRem": "0",
-            "Progress": 0
-          },
-          "Channels": [
-            {
-              "ID": 48,
-              "SendQueueCapacity": "1",
-              "SendQueueSize": "0",
-              "Priority": "5",
-              "RecentlySent": "0"
-            },
-            {
-              "ID": 64,
-              "SendQueueCapacity": "1000",
-              "SendQueueSize": "0",
-              "Priority": "10",
-              "RecentlySent": "211"
-            },
-            {
-              "ID": 32,
-              "SendQueueCapacity": "100",
-              "SendQueueSize": "0",
-              "Priority": "5",
-              "RecentlySent": "0"
-            },
-            {
-              "ID": 33,
-              "SendQueueCapacity": "100",
-              "SendQueueSize": "0",
-              "Priority": "10",
-              "RecentlySent": "0"
-            },
-            {
-              "ID": 34,
-              "SendQueueCapacity": "100",
-              "SendQueueSize": "0",
-              "Priority": "5",
-              "RecentlySent": "0"
-            },
-            {
-              "ID": 35,
-              "SendQueueCapacity": "2",
-              "SendQueueSize": "0",
-              "Priority": "1",
-              "RecentlySent": "0"
-            },
-            {
-              "ID": 56,
-              "SendQueueCapacity": "1",
-              "SendQueueSize": "0",
-              "Priority": "5",
-              "RecentlySent": "0"
-            },
-            {
-              "ID": 0,
-              "SendQueueCapacity": "10",
-              "SendQueueSize": "0",
-              "Priority": "1",
-              "RecentlySent": "0"
-            }
-          ]
-        },
-        "remote_ip": "139.99.124.225"
-      }, ......
-    ]
-  }
-}
-```
-
-#### /health
-* curl tcp@localhost:26657/health | jq
-```
-{
-  "jsonrpc": "2.0",
-  "id": "",
-  "result": {}
-}
-```
-
-#### curl tcp@localhost:26657/validators?height= | jq
-```
-{
-  "jsonrpc": "2.0",
-  "id": "",
-  "result": {
-    "block_height": "1",
-    "validators": [
-      {
-        "address": "000001E443FD237E4B616E2FA69DF4EE3D49A94F",
-        "pub_key": {
-          "type": "tendermint/PubKeyEd25519",
-          "value": "9tK9IT+FPdf2qm+5c2qaxi10sWP+3erWTKgftn2PaQM="
-        },
-        "voting_power": "250353",
-        "proposer_priority": "250353"
-      }, ......
-    ]
   }
 }
 ```
