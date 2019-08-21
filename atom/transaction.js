@@ -14,7 +14,6 @@ router.post('/assetsTransfer', async function (req, res) {
     const ecpairPriv = cosmos.getECPairPriv(req.body.phrase)
 
     const accountInfo = await cosmos.getAccounts(address)
-    logger.info('accountInfo data: ', accountInfo)
 
     const stdSignMsg = cosmos.NewStdMsg({
         type: "cosmos-sdk/MsgSend",
@@ -23,7 +22,7 @@ router.post('/assetsTransfer', async function (req, res) {
         amountDenom: "uatom",
         amount: req.body.value,
         feeDenom: "uatom",
-        fee: 1, //5000,
+        fee: 5000, //5000,
         gas: 200000, //200000,
         memo: "",
         account_number: accountInfo.value.account_number,
