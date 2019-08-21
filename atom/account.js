@@ -46,7 +46,7 @@ router.post('/getAssetsByAccount', async function (req, res) {
             })
 
             result.on('end', () => {
-                logger.info('Response rawData: ', rawData)
+                // logger.info('Response rawData: ', rawData)
 
                 const parsedData = JSON.parse(rawData)
                 if (parsedData.error && parsedData.error != "") {
@@ -80,7 +80,7 @@ router.post('/validatorAddress', async function (req, res) {
             })
 
             result.on('end', () => {
-                logger.info('Response rawData: ', rawData)
+                // logger.info('Response rawData: ', rawData)
 
                 const parsedData = JSON.parse(rawData)
                 if (parsedData.error && parsedData.error != "") {

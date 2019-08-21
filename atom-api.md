@@ -36,18 +36,55 @@ Blockchain api  |  |        Rest 127.0.0.1317      |  |
 
 #### /txs/{hash}
 * https://lcd-do-not-abuse.cosmostation.io/txs/A0AFDA28139054BDFE065418DB2795F69B494FF996565FF7382493FAEFFC0905
+* tx.value.msg[0].type
+  * Send              cosmos-sdk/MsgSend
+  * Multi Send        cosmos-sdk/MsgMultiSend
+  * Delegate          cosmos-sdk/MsgDelegate
+  * Withdraw Reward   cosmos-sdk/MsgWithdrawDelegationReward
 ```
 {
-    "height":"1495889",
-    "txhash":"A0AFDA28139054BDFE065418DB2795F69B494FF996565FF7382493FAEFFC0905",
+    "height":"1508448",
+    "txhash":"A31F1DC9BE1469B1B0C6D66F9581C37471A20AECEDC3964B637F20C2872D282D",
     "raw_log":"[{"msg_index":"0","success":true,"log":""}]",
-    "logs":Array[1],
+    "logs":[
+        {
+            "msg_index":"0",
+            "success":true,
+            "log":""
+        }
+    ],
     "gas_wanted":"200000",
-    "gas_used":"27778",
-    "tags":Array[3],
-    "tx":Object{...},
-    "timestamp":"2019-08-20T06:30:55Z"
+    "gas_used":"59753",
+    "tags":Array[4],
+    "tx":{
+        "type":"auth/StdTx",
+        "value":{
+            "msg":[
+                {
+                    "type":"cosmos-sdk/MsgWithdrawDelegationReward",
+                    "value":{
+                        "delegator_address":"cosmos1xzud24na9tucauc7lf6pjk84kqsgq3eq0ks7nw",
+                        "validator_address":"cosmosvaloper1rwh0cxa72d3yle3r4l8gd7vyphrmjy2kpe4x72"
+                    }
+                }
+            ],
+            "fee":Object{...},
+            "signatures":Array[1],
+            "memo":""
+        }
+    },
+    "timestamp":"2019-08-21T06:44:40Z"
 }
+```
+
+#### /txs/{address}
+* https://lcd-do-not-abuse.cosmostation.io/txs
+* application/json    JSON.stringify(signedTx)
+```
+{ error: 'broadcast_tx_sync: Response error: RPC error -32603 - Internal error: Tx already exists in cache' }
+```
+```
+{ height: '0', txhash: 'EDA24303ECDB7CB87B4D0FCED2B01EBA7B853EFB3DCF6A8CD38FCEB71598484B' }
 ```
 
 ## RPC API EXAMPLE
