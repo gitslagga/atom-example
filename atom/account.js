@@ -1,4 +1,4 @@
-const https = require('https')
+const http = require('https')
 const express = require('express')
 const router = express.Router()
 const bodyParser = require('body-parser')
@@ -38,7 +38,7 @@ router.post('/getAssetsByAccount', async function (req, res) {
 
     try {
         let url = config.rest_node + '/bank/balances/' + req.body.address
-        https.get(url, (result) => {
+        http.get(url, (result) => {
             result.setEncoding('utf8')
             let rawData = ''
             result.on('data', (chunk) => { 
@@ -46,16 +46,60 @@ router.post('/getAssetsByAccount', async function (req, res) {
             })
 
             result.on('end', () => {
-                const parsedData = JSON.parse(rawData)
-                const data = parsedData.filter(asset => asset.denom === 'uatom').map(data => {
-                    return data.amount
-                })
+                logger.info('Response rawData: ', rawData)
 
-                res.json({ code: 0, data: data == '' ? null : data[0] })
+                const parsedData = JSON.parse(rawData)
+                if (parsedData.error && parsedData.error != "") {
+                    logger.info('Response parsedData: ', parsedData)
+                    return res.json({ code: 405, data: "" })
+                }
+                
+                const data = parsedData.filter(asset => asset.denom === 'uatom')
+                res.json({ code: 0, data: data == "" ? "" : data[0].amount })
             })
         })
-    } catch (e) {
-        logger.error(e.message)
+    } catch (error) {
+        logger.error(error.message)
+        return { code: 405, msg: error.message.toString() } 
+    }  
+})
+
+router.post('/validatorAddress', async function (req, res) {
+    if (!req.body || !req.body.address)
+        return res.json({ code: 404, msg: 'missing params' })
+
+    logger.info('Request Body: ', req.body)
+
+    try {
+        let url = config.rest_node + '/auth/accounts/' + req.body.address
+        http.get(url, (result) => {
+            result.setEncoding('utf8')
+            let rawData = ''
+            result.on('data', (chunk) => { 
+                rawData += chunk
+            })
+
+            result.on('end', () => {
+                logger.info('Response rawData: ', rawData)
+
+                const parsedData = JSON.parse(rawData)
+                if (parsedData.error && parsedData.error != "") {
+                    logger.info('Response parsedData: ', parsedData)
+                    return res.json({ code: 405, data: false })
+                }
+                
+                // atom address, but hasn't on blockchain
+                // if (parsedData.value.address == "") {
+                //     logger.info('Response parsedData: ', parsedData)
+                //     return res.json({ code: 0, data: false })
+                // }
+
+                res.json({ code: 0, data: true })
+            })
+        })
+    } catch (error) {
+        logger.error(error.message)
+        return { code: 405, msg: error.message.toString() } 
     }  
 })
 
