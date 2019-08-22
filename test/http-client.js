@@ -36,7 +36,20 @@ const chainId = "cosmoshub-2"
 const cosmos = cosmosjs.network("https://lcd-do-not-abuse.cosmostation.io", chainId)
 cosmos.setPath("m/44'/118'/0'/0/0")
 const phrase = 'creature skin anything heading connected circle surface announced unhappy voyage weigh paragraph exercise seven circle circle sent sky fuel greatest jump apple shake city'
+
 const address = cosmos.getAddress(phrase)
 const ecpairPriv = cosmos.getECPairPriv(phrase)
+const hex = ecpairPriv.toString('hex')
+const base64 = ecpairPriv.toString('base64')
+const binary = ecpairPriv.toString('binary')
 
-console.log(address, ecpairPriv.toString('hex'))
+
+console.log(ecpairPriv)
+
+console.log(hex)
+console.log(base64)
+console.log(binary)
+
+console.log(Buffer.from(hex, 'hex'))
+console.log(Buffer.from(base64, 'base64'))
+console.log(Buffer.from(binary, 'binary'))
