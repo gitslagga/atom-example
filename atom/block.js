@@ -21,10 +21,10 @@ router.post('/getBlocknumber', (req, res) => {
             const parsedData = JSON.parse(rawData)
             if (parsedData.error && parsedData.error != "") {
                 logger.info('Response parsedData: ', parsedData)
-                return res.json({ code: 0, data: "" })
+                return res.json({ code: 0, data: 0 })
             }
 
-            res.json({ code: 0, data: parsedData.result.sync_info.latest_block_height })
+            res.json({ code: 0, data: parseInt(parsedData.result.sync_info.latest_block_height) })
         })
     })
 })
@@ -94,7 +94,7 @@ router.post('/getTransaction', async function (req, res) {
                     send: txvalue.from_address,
                     to: txvalue.to_address,
                     token: txvalue.amount[0].denom,
-                    value: txvalue.amount[0].amount,
+                    value: parseInt(txvalue.amount[0].amount),
                     txHash: parsedData.txhash,
                 }
             }
@@ -104,7 +104,7 @@ router.post('/getTransaction', async function (req, res) {
                     send: txvalue.inputs[0].address,
                     to: txvalue.outputs[0].address,
                     token: txvalue.inputs[0].coins[0].denom,
-                    value: txvalue.inputs[0].coins[0].amount,
+                    value: parseInt(txvalue.inputs[0].coins[0].amount),
                     txHash: parsedData.txhash,
                 }
             }

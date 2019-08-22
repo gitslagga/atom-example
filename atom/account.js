@@ -50,11 +50,11 @@ router.post('/getAssetsByAccount', async function (req, res) {
             const parsedData = JSON.parse(rawData)
             if (parsedData.error && parsedData.error != "") {
                 logger.info('Response parsedData: ', parsedData)
-                return res.json({ code: 405, data: "" })
+                return res.json({ code: 405, data: 0 })
             }
             
             const data = parsedData.filter(asset => asset.denom === 'uatom')
-            res.json({ code: 0, data: data == "" ? "" : data[0].amount })
+            res.json({ code: 0, data: data == "" ? 0 : parseInt(data[0].amount) })
         })
     })
 })
