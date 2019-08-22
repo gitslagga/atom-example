@@ -14,7 +14,6 @@ router.post('/assetsTransfer', async function (req, res) {
     const ecpairPriv = cosmos.getECPairPriv(req.body.phrase)
 
     const accountInfo = await cosmos.getAccounts(address)
-
     const stdSignMsg = cosmos.NewStdMsg({
         type: "cosmos-sdk/MsgSend",
         from_address: address,
@@ -29,10 +28,10 @@ router.post('/assetsTransfer', async function (req, res) {
         sequence: accountInfo.value.sequence
     })
     const signedTx = cosmos.sign(stdSignMsg, ecpairPriv)
-    logger.info('signedTx data: ', signedTx)
+    // logger.info('signedTx data: ', signedTx)
 
     const txResponse = await cosmos.broadcast(signedTx)
-    logger.info('txResponse response: ', txResponse)
+    // logger.info('txResponse response: ', txResponse)
 
     res.json({ code: 0, data: txResponse })
 })
