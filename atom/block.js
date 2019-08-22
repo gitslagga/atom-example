@@ -53,7 +53,7 @@ router.post('/getBlock', (req, res) => {
             }
 
             let txs = parsedData.result.block.data.txs
-            if (txs.length > 0) {
+            if (txs && txs.length > 0) {
                 for (t in txs) {
                     txs[t] = sha256(Buffer.from(txs[t], 'base64'))
                 }
