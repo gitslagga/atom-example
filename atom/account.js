@@ -20,12 +20,12 @@ router.post('/generateAccount', async function (req, res) {
     const mnemonic = JSON.stringify(words).replace(/\[|\]|\"/g, "").replace(/\,/g, " ")
 
     const address = cosmos.getAddress(mnemonic)
-    const ecpairPriv = cosmos.getECPairPriv(mnemonic).toString('hex')
+    const ecpairpriv = cosmos.getECPairPriv(mnemonic).toString('hex')
 
     res.json({
         code: 0,
         data: {
-            address, ecpairPriv, mnemonic
+            address, ecpairpriv, mnemonic
         }
     })
 })

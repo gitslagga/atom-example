@@ -95,7 +95,7 @@ router.post('/getTransaction', async function (req, res) {
                     to: txvalue.to_address,
                     token: txvalue.amount[0].denom,
                     value: parseInt(txvalue.amount[0].amount),
-                    txHash: parsedData.txhash,
+                    txhash: parsedData.txhash,
                 }
             }
 
@@ -105,7 +105,7 @@ router.post('/getTransaction', async function (req, res) {
                     to: txvalue.outputs[0].address,
                     token: txvalue.inputs[0].coins[0].denom,
                     value: parseInt(txvalue.inputs[0].coins[0].amount),
-                    txHash: parsedData.txhash,
+                    txhash: parsedData.txhash,
                 }
             }
 
